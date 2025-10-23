@@ -1,1 +1,357 @@
-<h1></h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicina con Nanotecnología</title>
+
+<!-- Librerías -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* ===== GENERAL ===== */
+* { box-sizing: border-box; }
+body { margin:0; font-family:"Poppins",sans-serif; color:#fff; padding-top:100px; background:#00121f; min-height:100vh; }
+a { text-decoration:none; }
+
+/* ===== VIDEO DE FONDO ===== */
+#bg-media {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-1; overflow:hidden;
+  background:black;
+}
+#bg-media video {
+  width:100%; height:100%;
+  object-fit: cover;
+  filter: brightness(0.45);
+}
+
+/* ===== HEADER ===== */
+header{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.85);z-index:1000;padding:10px 0;text-align:center;box-shadow:0 0 20px #00ffff;}
+header h1{font-size:2em;color:#00ffff;margin:0 auto;animation:escribir 3.5s steps(40) 1 forwards;border-right:.12em solid #ff00ff;overflow:hidden;white-space:nowrap;width:0;}
+@keyframes escribir{from{width:0;}to{width:90%;}}
+nav{text-align:center;margin-top:6px;}
+nav button{background:linear-gradient(45deg,#00ffff,#ff00ff);color:#000;border:none;padding:9px 18px;margin:5px;border-radius:25px;font-weight:bold;cursor:pointer;transition:all 0.3s;}
+nav button:hover{transform:scale(1.05);color:#fff;}
+
+/* ===== CONTENEDOR ===== */
+.container{max-width:1100px;margin:20px auto;padding:0 15px;}
+
+/* ===== SECCIONES ===== */
+section{display:none;text-align:center;padding:40px 20px;margin:20px 0;border-radius:15px;background:rgba(0,0,50,0.45);box-shadow:0 0 25px rgba(0,255,255,0.08);}
+section.active{display:block;}
+section h2{font-size:1.9em;color:#ff00ff;margin-bottom:10px;text-shadow:0 0 8px #00ffff;}
+section p{font-size:1.05em;line-height:1.5;}
+
+/* ===== VIDEOS EN SECCIONES ===== */
+.section-video{width:90%;max-width:900px;margin:18px auto;border-radius:12px;overflow:hidden;box-shadow:0 0 22px cyan;}
+.section-video video{width:100%;height:500px;border-radius:12px;}
+
+/* ===== GALERÍA DE IMÁGENES ===== */
+.gallery{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:18px;}
+.gallery img{width:250px;height:160px;object-fit:cover;border-radius:12px;cursor:pointer;box-shadow:0 0 12px rgba(255,0,255,0.25);transition:transform .25s,box-shadow .25s;}
+.gallery img:hover{transform:scale(1.05);box-shadow:0 0 22px cyan;}
+
+/* ===== MODAL ===== */
+.modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;}
+.modal .modal-content{background:#001f3f;padding:18px;border-radius:12px;width:90%;max-width:700px;color:#fff;box-shadow:0 0 30px cyan;}
+.close{float:right;font-size:24px;cursor:pointer;color:#fff;}
+
+/* ===== FORMULARIO ===== */
+form{display:inline-block;text-align:left;background:rgba(0,0,0,0.6);padding:18px;border-radius:12px;box-shadow:0 0 18px cyan;}
+input,textarea{width:100%;padding:8px;margin:8px 0;border-radius:8px;border:none;outline:none;}
+
+/* ===== BOTONES DE EXPORTACIÓN ===== */
+.export-controls{margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ===== FOOTER ===== */
+footer{text-align:center;padding:14px;color:cyan;margin-top:24px;background:rgba(0,0,0,0.5);}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:640px){header h1{font-size:1.6em;} .gallery img{width:46%;height:120px;}}
+</style>
+</head>
+<body>
+
+<!-- VIDEO DE FONDO -->
+<div id="bg-media">
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="Nano-png.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- HEADER -->
+<header>
+  <h1>Medicina con Nanotecnología</h1>
+  <nav>
+    <button onclick="location.href='#inicio'">Inicio</button>
+    <button onclick="location.href='#info'">Información General</button>
+    <button onclick="location.href='#avances'">Avances</button>
+    <button onclick="location.href='#futuro'">Futuro</button>
+    <button onclick="location.href='#contacto'">Contacto</button>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- INICIO -->
+  <section id="inicio">
+    <h2>Inicio</h2>
+    <p>La medicina con nanotecnologia es una rama innovadora de la ciencia que utiliza materiales y dispositivos extremadamente pequeños, llamados nanoparticulas, para prevenir, diagnosticar y tratar enfermedades. Esta tecnologia permite trabajar a nivel molecular y celular, lo que mejora la precision y la efectividad de los tratamientos medicos.
+
+Gracias a la nanotecnologia, los medicos pueden dirigir medicamentos directamente hacia las celulas enfermas sin dañar las sanas, desarrollar sistemas de diagnostico mas rapidos y crear materiales biocompatibles para reparar tejidos o fabricar organos artificiales. En el futuro, se espera que esta ciencia transforme completamente la manera en que se tratan enfermedades como el cancer, la diabetes y las infecciones, ofreciendo soluciones mas seguras, personalizadas y eficaces.</p>
+   <div class="section-video">
+    <iframe src="https://www.youtube.com/embed/hKg33wo2vjw?list=PLoU5lBJ7_OVoHYaoHITGRMiaWkAhnSUvU" title="Introducción a la Nanomedicina (Español)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+    <div class="gallery">
+      <img src="imagen1.jpg" data-caption="La nanomedicina consiste en la aplicación de la nanotecnología, materiales de tamaño nanométrico para afrontar problemas biomédicos." onclick="mostrarInfoImagen(event)">
+      <img src="imagen2.jpg" data-caption="Microscopios permiten observar células a nivel molecular." onclick="mostrarInfoImagen(event)">
+      <img src="imagen3.jpg" data-caption="Nanobots pueden reparar tejidos a escala celular." onclick="mostrarInfoImagen(event)">
+    </div>
+  </section>
+
+  <!-- INFORMACIÓN -->
+  <section id="info">
+    <h2>Información General</h2>
+    <p>La medicina con nanotecnología es una rama avanzada de la ciencia que combina la nanotecnología (el estudio y manipulación de materiales a una escala extremadamente pequeña, del tamaño de los átomos y moléculas) con la medicina, para crear nuevas herramientas y tratamientos destinados a mejorar la salud humana.
+
+A continuación, te dejo una explicación clara y completa:
+
+
+ Información general sobre la medicina con nanotecnología
+
+La nanotecnología médica se enfoca en el uso de nanopartículas y nanodispositivos para diagnosticar, tratar y prevenir enfermedades. Estas partículas son tan pequeñas que pueden interactuar directamente con las células del cuerpo, permitiendo tratamientos más precisos, eficaces y con menos efectos secundarios.
+
+Aplicaciones principales
+
+1. Diagnóstico temprano de enfermedades
+
+Se utilizan nanosensores para detectar enfermedades como el cáncer en etapas muy iniciales.
+
+Pueden identificar virus o bacterias con gran rapidez y exactitud.
+
+2. Tratamientos más eficaces
+
+Los nanomedicamentos pueden transportar fármacos directamente a las células enfermas sin afectar las sanas.
+
+Esto mejora la efectividad y reduce los daños colaterales en tratamientos como la quimioterapia.
+
+3. Regeneración de tejidos
+
+Se desarrollan nanomateriales que ayudan a reparar órganos o tejidos dañados, por ejemplo, en el corazón, piel o huesos.
+
+
+4. Liberación controlada de medicamentos
+
+Las nanopartículas pueden liberar el medicamento poco a poco en el lugar exacto del cuerpo donde se necesita, mejorando su acción.
+
+
+ Ventajas de la nanotecnología en la medicina
+
+Mayor precisión en diagnósticos y tratamientos.
+
+Menos efectos secundarios.
+
+Recuperaciones más rápidas.
+
+Posibilidad de curar enfermedades antes consideradas incurables.</p>
+   <div class="section-video">
+  <iframe src="https://www.youtube.com/embed/9q4zCCAJbBw" 
+          title="Nanotecnología y la Medicina" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</div>
+     <div class="gallery">
+      <img src="imagen4.jpg" data-caption="Los nanomateriales mejoran el diagnóstico precoz y tratamiento de enfermedades." onclick="mostrarInfoImagen(event)">
+      <img src="imagen5.jpg" data-caption="La nanomedicina permite diseñar fármacos más eficientes combinando nanopartículas." onclick="mostrarInfoImagen(event)">
+      <img src="imagen6.jpg" data-caption="Nanosensores detectan enfermedades tempranas en fluidos corporales." onclick="mostrarInfoImagen(event)">
+    </div>
+  </section>
+
+  <!-- AVANCES -->
+  <section id="avances">
+    <h2>Avances</h2>
+    <p>Avances de la medicina con nanotecnologia
+
+La medicina con nanotecnologia ha logrado grandes avances en los ultimos años, cambiando la forma en que se diagnostican y tratan muchas enfermedades. Gracias al desarrollo de materiales y dispositivos a escala nanometrica, los medicos y cientificos pueden trabajar dentro del cuerpo humano con una precision nunca antes vista.
+Principales avances
+
+1. Nanomedicamentos inteligentes
+Se han creado particulas diminutas capaces de transportar medicamentos directamente al organo o tejido afectado. Estos nanomedicamentos liberan la dosis necesaria justo donde se necesita, reduciendo los efectos secundarios y aumentando la eficacia del tratamiento.
+
+
+2. Nanobots o robots microscopicos
+En el futuro cercano, se estan desarrollando nanorobots que podran circular por el torrente sanguineo para reparar celulas, eliminar bacterias o limpiar arterias bloqueadas. Estos robots tambien podran ayudar a detectar enfermedades antes de que aparezcan los sintomas.
+
+
+3. Deteccion temprana del cancer
+Se utilizan nanosensores para identificar celulas cancerigenas en sus primeras etapas. Esto permite un diagnostico rapido y tratamientos mas efectivos.
+
+
+4. Regeneracion de tejidos y organos
+Con nanomateriales se han fabricado tejidos artificiales y estructuras que ayudan a que las celulas se regeneren naturalmente, lo cual es muy util en quemaduras, lesiones oseas o problemas cardiacos.
+
+
+5. Terapias personalizadas
+La nanotecnologia permite diseñar tratamientos unicos para cada paciente, analizando su ADN y creando medicamentos que se adapten a su organismo.</p>
+   <div class="section-video">
+  <iframe src="https://www.youtube.com/embed/Mfm17Hin2jo" 
+          title="YouTube Short sobre Nanotecnología" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</div>
+     <div class="gallery">
+      <img src="imagen7.jpg" data-caption="Nanocápsulas administran medicamentos directamente a células específicas." onclick="mostrarInfoImagen(event)">
+      <img src="imagen8.jpg" data-caption="Biosensores detectan virus y bacterias con alta sensibilidad y rapidez." onclick="mostrarInfoImagen(event)">
+      <img src="imagen9.jpg" data-caption="Estructuras electrónicas nanométricas y biosensores mejoran estudios de salud." onclick="mostrarInfoImagen(event)">
+    </div>
+  </section>
+
+  <!-- FUTURO -->
+  <section id="futuro">
+    <h2>Futuro</h2>
+    <p>Futuro de la medicina con nanotecnologia
+
+El futuro de la medicina con nanotecnologia promete cambiar por completo la forma en que se diagnostican, tratan y previenen las enfermedades. Gracias a los continuos avances en la ciencia, se espera que la nanotecnologia se convierta en una herramienta esencial en la medicina del mañana, ofreciendo tratamientos mas rapidos, precisos y personalizados.
+
+Posibles desarrollos a futuro
+
+1. Nanorobots dentro del cuerpo humano
+Se preve que en el futuro los nanorobots puedan circular por el torrente sanguineo para reparar tejidos, eliminar virus, limpiar arterias y aplicar tratamientos directamente en las celulas enfermas sin dañar las sanas.
+
+
+2. Cura de enfermedades incurables
+La nanotecnologia podria permitir el desarrollo de terapias para enfermedades como el cancer, el Alzheimer, la diabetes o las enfermedades cardiacas, gracias a la manipulacion de celulas y moleculas a nivel nanometrico.
+
+
+3. Regeneracion de organos
+En los proximos años se espera poder crear organos artificiales o reparar los dañados utilizando nanomateriales que estimulen el crecimiento natural de las celulas.
+
+
+4. Diagnosticos instantaneos
+Los nanosensores avanzados podran detectar enfermedades con una sola gota de sangre o incluso mediante el aliento, permitiendo un diagnostico rapido y seguro en cuestion de segundos.
+
+
+5. Medicina personalizada
+Cada persona podra recibir tratamientos diseñados especialmente segun su genetica y su estilo de vida, logrando una medicina mucho mas efectiva y sin efectos secundarios graves.
+
+Impacto esperado
+
+La nanotecnologia marcara una nueva era en la salud, donde los tratamientos seran menos invasivos, las operaciones mas seguras y las curas mas efectivas. En el futuro, la nanotecnologia no solo ayudara a curar enfermedades, sino tambien a prevenirlas y mejorar la calidad de vida de toda la humanidad.</p>
+    <div class="section-video">
+  <iframe src="https://www.youtube.com/embed/mKMH-SuptV8" 
+          title="Video sobre Nanomedicina" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</div>
+
+    <div class="gallery">
+      <img src="imagen10.jpg" data-caption="Nanobots realizan tareas de precisión dentro del cuerpo." onclick="mostrarInfoImagen(event)">
+      <img src="imagen11.jpg" data-caption="Biomateriales nanofibrados permiten reparar tejido dañado y entregar fármacos." onclick="mostrarInfoImagen(event)">
+      <img src="imagen12.jpg" data-caption="Sensores implantables permiten medicina predictiva y monitoreo continuo." onclick="mostrarInfoImagen(event)">
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Contáctanos para más información sobre investigación y colaboraciones.</p>
+    <form id="contactForm" onsubmit="event.preventDefault(); alert('Formulario enviado (simulación)');">
+      <label>Nombre</label>
+      <input type="text" id="nombre" placeholder="Tu nombre" required>
+      <label>Correo</label>
+      <input type="email" id="correo" placeholder="tu@correo.com" required>
+      <label>Mensaje</label>
+      <textarea id="mensaje" rows="4" placeholder="Escribe tu mensaje"></textarea>
+      <div style="text-align:right; margin-top:8px;">
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+    <div class="export-controls">
+      <button onclick="exportExactPDF()">Guardar PDF</button>
+      <button onclick="exportExactExcel()">Guardar Excel</button>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Jacqueline Alexandra Diaz Carbajal 2-1 General
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal" onclick="cerrarModal(event)">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal();">&times;</span>
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Mostrar modal de imágenes
+function mostrarInfoImagen(e) {
+  const img = e.currentTarget;
+  document.getElementById('modalTitle').textContent = img.closest('section').querySelector('h2').textContent;
+  document.getElementById('modalText').textContent = img.getAttribute('data-caption');
+  document.getElementById('modal').style.display = 'flex';
+}
+function closeModal(){document.getElementById('modal').style.display='none';}
+function cerrarModal(e){if(e.target.id==='modal') closeModal();}
+
+// Mostrar sección según hash
+function mostrarSeccionPorHash(){
+  const hash = location.hash.replace('#','') || 'inicio';
+  document.querySelectorAll('section').forEach(s=>s.style.display='none');
+  const s = document.getElementById(hash);
+  if(s) s.style.display='block';
+}
+window.addEventListener('hashchange', mostrarSeccionPorHash);
+window.addEventListener('load', mostrarSeccionPorHash);
+
+// Exportar PDF
+function exportExactPDF() {
+  const sec = document.querySelector('section[style*="display: block"]') || document.getElementById('inicio');
+  const title = sec.querySelector('h2')?.innerText || 'Seccion';
+  const text = sec.querySelector('p')?.innerText || '';
+  const formData = [];
+  sec.querySelectorAll('input,textarea').forEach(i => { if(i.value) formData.push({campo:i.placeholder||i.id,valor:i.value}); });
+  const imgs = Array.from(sec.querySelectorAll('.gallery img')).map(i=>({caption:i.getAttribute('data-caption'),src:i.getAttribute('src')}));
+  const videos = Array.from(sec.querySelectorAll('video')).map(v=>v.querySelector('source').src);
+  const doc = new jspdf.jsPDF({ unit: 'pt', format: 'a4' });
+  let y=60, margin=40, pageWidth=doc.internal.pageSize.getWidth();
+  doc.setFontSize(18); doc.text(title, margin, y); y+=30;
+  doc.setFontSize(12); doc.text(doc.splitTextToSize(text,pageWidth-margin*2),margin,y); y+=12*text.split('\n').length+10;
+  if(videos.length){ doc.text('Videos:',margin,y); y+=18; videos.forEach((v,i)=>{doc.text(`Video ${i+1}: ${v}`,margin,y); y+=18;}); }
+  if(imgs.length){ doc.text('Galería de imágenes:',margin,y); y+=18; imgs.forEach(im=>{doc.text(`- ${im.caption} (ruta: ${im.src})`,margin,y); y+=18;}); }
+  if(formData.length){ doc.text('Formulario:',margin,y); y+=18; formData.forEach(f=>{doc.text(`- ${f.campo}: ${f.valor}`,margin,y); y+=18;}); }
+  doc.save(`${title.replace(/\s+/g,'_')}_Exacto.pdf`);
+}
+
+// Exportar Excel
+function exportExactExcel() {
+  const sec = document.querySelector('section[style*="display: block"]') || document.getElementById('inicio');
+  const title = sec.querySelector('h2')?.innerText || 'Seccion';
+  const text = sec.querySelector('p')?.innerText || '';
+  const formData = []; sec.querySelectorAll('input,textarea').forEach(i=>{if(i.value) formData.push({Campo:i.placeholder||i.id,Valor:i.value});});
+  const imgs = Array.from(sec.querySelectorAll('.gallery img')).map(i=>({Campo:'Imagen',Valor:`${i.getAttribute('data-caption')} (ruta: ${i.getAttribute('src')})`}));
+  const videos = Array.from(sec.querySelectorAll('video')).map((v,i)=>({Campo:'Video',Valor:v.querySelector('source').src}));
+  const worksheetData = [{Campo:'Sección',Valor:title},{Campo:'Descripción',Valor:text},...videos,...imgs,...formData];
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(worksheetData,{header:["Campo","Valor"]});
+  XLSX.utils.book_append_sheet(wb,ws,'Sección');
+  XLSX.writeFile(wb,`${title.replace(/\s+/g,'_')}_Exacto.xlsx`);
+}
+</script>
+
+</body>
+</html>
